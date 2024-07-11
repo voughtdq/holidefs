@@ -40,7 +40,11 @@ defmodule Holidefs.Holiday do
   defp in_year_range?(%{"before" => before_year}, year), do: year <= before_year
   defp in_year_range?(%{"after" => after_year}, year), do: year >= after_year
   defp in_year_range?(%{"limited" => years}, year), do: year in years
-  defp in_year_range?(%{"between" => years}, year), do: year in years
+  defp in_year_range?(%{"between" => %{"start" => year_start, "end" => year_end}}, year) do 
+    year in year_start..year_end
+  end
+  defp in_year_range?(%{"from" => from_year}, year), do: year >= from_year
+  defp in_year_range?(%{"until" => until_year}, year), do: year <= until_year
 
   defp build_from_rule(code, %Rule{function: fun} = rule, year, opts) when fun != nil do
     name = translate_name(code, rule.name)
