@@ -29,8 +29,8 @@ defmodule Holidefs.Definition do
   Returns the path where all the locale definitions are saved.
   """
   @spec path(atom) :: Path.t()
-  def path(type \\ :default) 
-  
+  def path(type \\ :default)
+
   def path(:default) do
     Path.join(:code.priv_dir(:holidefs), "/calendars/definitions")
   end

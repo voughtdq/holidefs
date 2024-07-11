@@ -94,7 +94,7 @@ defmodule Holidefs.Definition.CustomFunctions do
   def rosh_hashanah(2046, _), do: ~D[2046-10-01]
   def rosh_hashanah(2047, _), do: ~D[2047-09-21]
   def rosh_hashanah(2048, _), do: ~D[2048-09-08]
-  def rosh_hashanah(2049, _), do: ~D[2049-09-27] 
+  def rosh_hashanah(2049, _), do: ~D[2049-09-27]
   def rosh_hashanah(2050, _), do: ~D[2050-09-17]
   def rosh_hashanah(2051, _), do: ~D[2051-09-07]
   def rosh_hashanah(2052, _), do: ~D[2052-09-24]
@@ -485,12 +485,14 @@ defmodule Holidefs.Definition.CustomFunctions do
   def epiphany(year, _) do
     {:ok, date} = Date.new(year, 1, 6)
     day_of_week = Date.day_of_week(date)
-    
+
     cond do
       day_of_week > 1 && day_of_week < 7 ->
         Date.add(date, 8 - day_of_week)
+
       day_of_week == 7 ->
         Date.add(date, 1)
+
       true ->
         date
     end
@@ -505,12 +507,13 @@ defmodule Holidefs.Definition.CustomFunctions do
   @doc false
   def qld_brisbane_ekka_holiday(year, rule) do
     first_friday = DateCalculator.nth_day_of_week(year, rule.month, 1, 5)
-    
-    date = if first_friday.day < 5 do
-      DateCalculator.nth_day_of_week(year, rule.month, 2, 5)
-    else
-      first_friday
-    end
+
+    date =
+      if first_friday.day < 5 do
+        DateCalculator.nth_day_of_week(year, rule.month, 2, 5)
+      else
+        first_friday
+      end
 
     Date.add(date, 5)
   end
@@ -542,8 +545,9 @@ defmodule Holidefs.Definition.CustomFunctions do
 
   defp co_shift_date(year, rule, day) do
     {:ok, date} = Date.new(year, rule.month, day)
+    day_of_week = Date.day_of_week(date)
 
-    if (day_of_week = Date.day_of_week(date)) > 1 do
+    if day_of_week > 1 do
       Date.add(date, 8 - day_of_week)
     else
       date

@@ -184,6 +184,7 @@ defmodule Holidefs.DateCalculator do
         6 -> 2
         7 -> 1
       end
+
     Date.add(date, day)
   end
 end

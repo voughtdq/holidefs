@@ -42,12 +42,14 @@ defmodule Holidefs.Definition.Rule do
   @valid_weekdays 1..7
 
   def build(code, month, %{"name" => name} = map) do
-    %{"year_ranges" => year_ranges,
+    %{
+      "year_ranges" => year_ranges,
       "type" => type,
       "observed" => observed,
       "function" => function,
-      "function_modifier" => function_modifier} = fill_missing(map)
-    
+      "function_modifier" => function_modifier
+    } = fill_missing(map)
+
     rule = %Rule{
       month: month,
       name: name,
@@ -62,10 +64,13 @@ defmodule Holidefs.Definition.Rule do
     case map do
       %{"week" => week, "wday" => wday} ->
         %{rule | week: week!(week), weekday: weekday!(wday)}
+
       %{"mday" => mday} ->
         %{rule | day: mday}
+
       %{"function" => function} when not is_nil(function) ->
         rule
+
       _ ->
         raise InvalidRuleMapError, map: map
     end
@@ -73,6 +78,7 @@ defmodule Holidefs.Definition.Rule do
 
   defp fill_missing(map) do
     keys = ~w(year_ranges type observed function function_modifier)
+
     Enum.reduce(keys, map, fn key, map ->
       Map.put_new(map, key, nil)
     end)
@@ -102,9 +108,11 @@ defmodule Holidefs.Definition.Rule do
 
   defp function_from_name!(:""), do: nil
   defp function_from_name!(nil), do: nil
-  defp function_from_name!(name) when is_atom(name) and name in @custom_functions do 
+
+  defp function_from_name!(name) when is_atom(name) and name in @custom_functions do
     name
   end
+
   defp function_from_name!(name) when is_atom(name) do
     raise FunctionNotDefinedError, name: name
   end

@@ -98,11 +98,11 @@ defmodule Holidefs.Mixfile do
       {:yaml_elixir, "~> 2.0"},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:holidays,
-        github: "holidays/definitions",
-        ref: "b2c3d6dda526245082a6bd93a6b438f1990f845b",
-        app: false,
-        compile: false,
-        depth: 1},
+       github: "holidays/definitions",
+       ref: "b2c3d6dda526245082a6bd93a6b438f1990f845b",
+       app: false,
+       compile: false,
+       depth: 1}
     ]
   end
 end

@@ -47,7 +47,9 @@ defmodule Holidefs.Definition.RuleTest do
         assert %Rule{} = Rule.build(:us, 1, %{"name" => "Weekday test", "week" => 1, "wday" => i})
       end
 
-      assert %Rule{weekday: weekday} = Rule.build(:us, 1, %{"name" => "Weekday test", "week" => 1, "wday" => 0})
+      assert %Rule{weekday: weekday} =
+               Rule.build(:us, 1, %{"name" => "Weekday test", "week" => 1, "wday" => 0})
+
       assert weekday == 7
 
       assert_raise FunctionClauseError, fn ->

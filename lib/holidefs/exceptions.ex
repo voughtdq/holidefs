@@ -1,5 +1,8 @@
 defmodule Holidefs.Exceptions do
+  @moduledoc false
+
   defmodule FunctionNotDefinedError do
+    @moduledoc false
     defexception [:name]
 
     @impl Exception
@@ -7,7 +10,9 @@ defmodule Holidefs.Exceptions do
       "Function `#{exception.name}` is not defined."
     end
   end
+
   defmodule InvalidRuleMapError do
+    @moduledoc false
     defexception [:map]
 
     @impl Exception
@@ -17,9 +22,9 @@ defmodule Holidefs.Exceptions do
        - `week` and `wday`
        - `mday`
        - `function`
-      
+
       but got
-      #{inspect exception.map}
+      #{inspect(exception.map)}
       """
     end
   end
